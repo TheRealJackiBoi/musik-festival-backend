@@ -19,7 +19,7 @@ const io = socketIo(server, {
 
 
 app.get('/', function(request, response) {
-    response.send(counter.toString());
+    response.send("");
   });
 
 
