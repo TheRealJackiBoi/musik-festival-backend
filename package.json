@@ -1,0 +1,23 @@
+{
+  "name": "musik-festival-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheRealJackiBoi/musik-festival-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheRealJackiBoi/musik-festival-backend/issues"
+  },
+  "homepage": "https://github.com/TheRealJackiBoi/musik-festival-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase": "^8.4.1"
+  }
+}
