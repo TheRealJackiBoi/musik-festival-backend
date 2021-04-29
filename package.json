@@ -18,6 +18,7 @@
   "homepage": "https://github.com/TheRealJackiBoi/musik-festival-backend#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "firebase": "^8.4.1"
+    "firebase": "^8.4.1",
+    "node-fetch": "^2.6.1"
   }
 }
