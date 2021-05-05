@@ -140,7 +140,7 @@ function startNewVotingCycle(){
 async function startNextVideo(){ //Find most voted video and play it
     const snapshot = await votingRef.get();
 
-    let mostVotes = 0;
+    let mostVotes = -1;
     let votedVideo = "fZMRc-UyPm0" // Dummy video
 
     snapshot.forEach(element => { 
@@ -148,6 +148,7 @@ async function startNextVideo(){ //Find most voted video and play it
         let votes = entry.votes;
         if (votes > mostVotes){
             votedVideo = entry.videoId;
+            mostVotes = votes;
         }
     });
 
