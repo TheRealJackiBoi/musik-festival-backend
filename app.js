@@ -8,7 +8,7 @@ const firebase = require("firebase");
 require("firebase/auth");
 require("firebase/firestore");
 
-let playlistId = "PL7zsB-C3aNu1_Z7Qd-Qcbf2_U2YqUzK31";
+let playlistId = "PL64E6BD94546734D8";
 let playlistPageToken = "CAUQAA";
 
 
@@ -90,7 +90,7 @@ function newVideo(videoId){
           video = result.items[0].snippet;
             
             videoInfo = {
-                title: video.title,
+                title: formatTitle(video.title),
                 videoId: videoId,
                 duration: currentVideoLength
             }
@@ -106,7 +106,7 @@ function newVideo(videoId){
 
 
 function startNewVotingCycle(){
-    fetch("https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=5&playlistId=PL7zsB-C3aNu1_Z7Qd-Qcbf2_U2YqUzK31&pageToken=" + playlistPageToken + "&key=AIzaSyABQyO1Hrn0HCqGgRJFZm-Wm4fqNRFcjO4")
+    fetch("https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=5&playlistId=" + playlistId + "&pageToken=" + playlistPageToken + "&key=AIzaSyABQyO1Hrn0HCqGgRJFZm-Wm4fqNRFcjO4")
         .then(res => res.json())
           .then(
             (result) => {
@@ -119,14 +119,16 @@ function startNewVotingCycle(){
 
                 result.items.forEach(video => {
                    // console.log(video.snippet.resourceId.videoId);
-                    votingVideoTitles.push(video.snippet.title);
+                    let title = formatTitle(video.snippet.title)
+
+                    votingVideoTitles.push(title);
                     votingVideoIds.push(video.snippet.resourceId.videoId);
                 });
 
                
                 for (let i = 0; i < 5; i++){
-                    let votes = Math.floor(Math.random() * 95);
-                    votingRef.doc("song"+i).set({title: votingVideoTitles[i],  votes: votes, videoId: votingVideoIds[i], index: i});  
+                    //let votes = Math.floor(Math.random() * 95);
+                    votingRef.doc("song"+i).set({title: votingVideoTitles[i],  votes: 0, videoId: votingVideoIds[i], index: i});  
                 }
 
                 
@@ -166,3 +168,13 @@ async function start(){
 
 
 
+function formatTitle(title){
+    let n = title.indexOf("(");
+    if (n > 0)
+        title = title.substring(0,n);
+    n = title.indexOf("[");
+    if (n > 0)
+        title = title.substring(0,n);
+
+    return title;
+}
